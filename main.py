@@ -1,8 +1,8 @@
 def matrix(file_name='default.txt'):
     with open(file_name) as f:
         matrix_list = [
-            [float(j) for j in (i[0] + i[1:].replace('=-', '+').replace('=', '-').replace('-', '+-')).split('+')] for i
-            in f]
+            [float(j) for j in (i[0] + i[1:].replace('=-', '+').replace('=', '-').replace('-', '+-')).split('+')]
+            for i in f]
         matrix_list.append([0.0 if i != len(matrix_list) else 1.0 for i in range(len(matrix_list) + 1)])
         return matrix_list
 
@@ -50,9 +50,10 @@ if __name__ == '__main__':
         test = 0
         for j in range(len(result)):
             test += i[j] * result[j]
-        test *= -1
+            print(f'{"+" if i[j]*result[j] > 0 and j != 0 else ""}{i[j]*result[j]}', end='')
+        test *= 1
         result_len = str(i[-1])
-        while(result_len[1] != '.'):
+        while result_len[1] != '.':
             result_len = result_len[1:]
         result_len = len(result_len)
-        print(f"{round(test, result_len)} = {round(i[-1], result_len)}")
+        print(f"={round(test, result_len)} == {- round(i[-1], result_len)}", round(test, result_len) == -round(i[-1], result_len))
